@@ -5,21 +5,40 @@ public class Scrabble {
 
     HashMap<Character, Integer> scoreCard = new HashMap<>();
     private String word;
+    private Character[] doubleLetter;
+    private Character[] tripleLetter;
+    private boolean doubleWord;
+    private boolean tripleWord;
+    private int totalScore;
+
 
    public Scrabble(String word) {
       this.word = word;
+      this.totalScore = 0;
       scrabbleScoreCard();
+
+
    }
 
-   public int score(){
-       return scoreCardCal();
+    public Scrabble(String word, Character[] doubleLetter, Character[] tripleLetter, boolean doubleWord, boolean tripleWord) {
+        this.word = word;
+        this.doubleLetter = doubleLetter;
+        this.tripleLetter = tripleLetter;
+        this.doubleWord = doubleWord;
+        this.tripleWord = tripleWord;
+        this.totalScore = 0;
+        scrabbleScoreCard();
+    }
+
+    public int score(){
+       scoreCardCal();
+       doubleWordScore();
+       tripleWordScore();
+       return this.totalScore;
     }
 
 
-    public int scoreCardCal(){
-
-
-      int score = 0;
+    public void scoreCardCal(){
 
       if (this.word == null){
           this.word = "";
@@ -27,15 +46,27 @@ public class Scrabble {
       this.word = this.word.toUpperCase();
       char[] letterArray = this.word.toCharArray();
       for (HashMap.Entry<Character, Integer> entry : scoreCard.entrySet()) {
-         for (int i = 0; i < letterArray.length; i++) {
-            if (letterArray[i] == entry.getKey()) {
-               score += entry.getValue();
-            }
-         }
+          for (int i = 0; i < letterArray.length; i++) {
+              if (letterArray[i] == entry.getKey()) {
+                  this.totalScore += entry.getValue();
+              }
+          }
 
       }
-      return score;
    }
+
+
+   private void doubleWordScore(){
+       if (this.doubleWord){
+           this.totalScore *=2;
+       }
+   }
+
+    private void tripleWordScore(){
+        if (this.tripleWord){
+            this.totalScore *=3;
+        }
+    }
 
 
 
