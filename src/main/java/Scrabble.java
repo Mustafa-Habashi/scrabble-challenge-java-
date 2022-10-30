@@ -34,6 +34,8 @@ public class Scrabble {
        scoreCardCal();
        doubleWordScore();
        tripleWordScore();
+       tripleLetterCal();
+       doubleLetterCal();
        return this.totalScore;
     }
 
@@ -46,8 +48,8 @@ public class Scrabble {
       this.word = this.word.toUpperCase();
       char[] letterArray = this.word.toCharArray();
       for (HashMap.Entry<Character, Integer> entry : scoreCard.entrySet()) {
-          for (int i = 0; i < letterArray.length; i++) {
-              if (letterArray[i] == entry.getKey()) {
+          for (Character letter : letterArray) {
+              if (letter == entry.getKey()) {
                   this.totalScore += entry.getValue();
               }
           }
@@ -69,7 +71,20 @@ public class Scrabble {
     }
 
 
-
+    private void doubleLetterCal() {
+        if (this.doubleLetter != null) {
+            for (Character letter: this.doubleLetter) {
+                this.totalScore += scoreCard.get(letter);
+            }
+        }
+    }
+    private void tripleLetterCal(){
+        if(this.tripleLetter!=null){
+            for(Character letter : this.tripleLetter){
+                this.totalScore += scoreCard.get(letter)*2;
+            }
+        }
+    }
 
 
 
