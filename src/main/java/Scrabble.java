@@ -1,9 +1,10 @@
+import java.security.Key;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class Scrabble {
 
-    HashMap<Character, Integer> scoreCard = new HashMap<>();
+    HashMap< Character, Integer> scoreCard = new HashMap<Character,Integer>();
     private String word;
     private Character[] doubleLetter;
     private Character[] tripleLetter;
@@ -47,14 +48,15 @@ public class Scrabble {
       }
       this.word = this.word.toUpperCase();
       char[] letterArray = this.word.toCharArray();
-      for (HashMap.Entry<Character, Integer> entry : scoreCard.entrySet()) {
+      for (Map.Entry<Character, Integer> entry : scoreCard.entrySet()) {
           for (Character letter : letterArray) {
-              if (letter == entry.getKey()) {
-                  this.totalScore += entry.getValue();
+                  if(letter == entry.getKey()){
+                      this.totalScore += entry.getValue();
+                  }
               }
           }
 
-      }
+
    }
 
 
@@ -88,6 +90,8 @@ public class Scrabble {
 
 
 
+
+
     public void scrabbleScoreCard(){
 
        scoreCard.put('A', 1);
@@ -101,6 +105,7 @@ public class Scrabble {
        scoreCard.put('U', 1);
        scoreCard.put('L', 1);
 
+//
        scoreCard.put('D', 2);
        scoreCard.put('G', 2);
 
